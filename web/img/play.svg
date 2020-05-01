@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200px" height="200px" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>media-play-circle-lg</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" fill="#000000" fill-rule="nonzero">
+            <g id="media-play-circle-lg">
+                <path d="M100,0 C44.771875,0 0,44.771875 0,100 C0,155.228125 44.771875,200 100,200 C155.228125,200 200,155.228125 200,100 C200,44.771875 155.228125,0 100,0 Z M71.875,140.625 L71.875,59.375 L153.125,100 L71.875,140.625 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

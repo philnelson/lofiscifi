@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta name="viewport" content="width=device-width">
+    <title>Lofi Scifi on Retro Strange</title>
+    <style>
+
+      @font-face{ 
+        font-family: 'Rubik Regular';
+        src: url('fonts/rubik-regular-webfont.eot');
+        src: url('fonts/rubik-regular-webfont.eot?#iefix') format('embedded-opentype'),
+            url('fonts/rubik-regular-webfont.woff') format('woff'),
+            url('fonts/rubik-regular-webfont.ttf') format('truetype'),
+            url('fonts/rubik-regular-webfont.svg#webfont') format('svg');
+      }
+
+      @font-face{ 
+        font-family: 'Rubik Black';
+        src: url('fonts/rubik-black-webfont.eot');
+        src: url('fonts/rubik-black-webfont.eot?#iefix') format('embedded-opentype'),
+            url('fonts/rubik-black-webfont.woff') format('woff'),
+            url('fonts/rubik-black-webfont.ttf') format('truetype'),
+            url('fonts/rubik-black-webfont.svg#webfont') format('svg');
+      }
+
+      @font-face{ 
+        font-family: 'Rubik Bold Italic';
+        src: url('fonts/rubik-bolditalic-webfont.eot');
+        src: url('fonts/rubik-bolditalic-webfont.eot?#iefix') format('embedded-opentype'),
+            url('fonts/rubik-bolditalic-webfont.woff') format('woff'),
+            url('fonts/rubik-bolditalic-webfont.ttf') format('truetype'),
+            url('fonts/rubik-bolditalic-webfont.svg#webfont') format('svg');
+      }
+
+      h1,h2,h3,h4,h5,h6 {
+        font-weight: normal;
+      }
+
+      html {
+        background: #ddd;
+      }
+
+      html.tvroll {
+        background: #ddd url(img/fuzzy_screen.gif) center center repeat;
+        background-size: 400%;
+      }
+
+      html.glitch1 {
+        background: #ddd url(img/glitch_reed.gif) center center repeat;
+        background-size: 400%;
+      }
+
+      html.radio1 {
+        background: #ddd url(img/radio_grunge.gif) center center repeat;
+        background-size: 400%;
+      }
+
+      html.radio2 {
+        background: #ddd url(img/old_radio_tune.gif) center center repeat;
+        background-size: 400%;
+      }
+
+      main {
+        background: rgba(255,255,255,0.7);
+        font-family: 'Rubik Regular';
+        width: 300px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-top: 60px;
+        border-top-left-radius: 40px;
+      }
+
+      @media only screen and (min-width: 600px) {
+        main {
+          width: 540px;
+        }
+      }
+
+      #xfu-player {
+        
+        width: 100%;
+        display: block;
+        clear: both;
+      }
+
+      #xfu-player #big-ol-button.play {
+        background: url('img/play.svg') center center no-repeat;
+        background-size: contain;
+      }
+
+      #xfu-player #big-ol-button.pause {
+        background: url('img/pause.svg') center center no-repeat;
+        background-size: contain;
+      }
+
+      #xfu-player #big-ol-button {
+        height: 200px;
+        width: 200px;
+        cursor: pointer;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      audio {
+        width: 100%;
+        min-height: 50px;
+      }
+
+      main p {
+        font-size: 18px;
+        line-height: 26px;
+        margin-bottom: 20px;
+      }
+
+      .playing {
+        opacity: 0;
+        transition-property: opacity;
+        transition-duration: 150ms;
+        margin-bottom: 40px;
+      }
+
+      .playing .context {
+        display: block;
+        
+        clear: both;
+        text-transform: uppercase;
+      }
+
+      /* ON AIR */ 
+      .live-icon {
+        display: inline-block;
+        margin: 0 auto;
+        border-radius: 50%;
+        background: red;
+        width: 20px;
+        height: 20px;
+        animation: live 2s infinite;
+      }
+
+      .live-text {
+        display: inline-block;
+        text-align: center; 
+        color: red; 
+        font-family: arial; 
+        font-weight: bold;
+        position: relative;
+        left: 5px;
+        top: -4px;
+      }
+
+      .now-playing-title {
+        font-family: 'Rubik Bold Italic';
+      }
+
+      @keyframes live {
+        0%, 100% {
+        background: none;
+        }
+        50% {
+        background: red;
+        }
+      }
+      
+      #metacontext {
+        padding: 20px;
+      }
+
+      #metacontext p {
+        text-align: center;
+      }
+
+      #metacontext h1 {
+        font-family: 'Rubik Black';
+        font-size: 50px;
+        line-height: 50px;
+        text-align: center;
+        margin: 0 0 6px 0;
+      }
+
+      #metacontext h2 {
+        font-family: 'Rubik Black';
+        font-size: 38px;
+        line-height: 38px;
+        text-align: center;
+        margin: 0 0 20px 0;
+      }
+
+      #station-ident {
+        text-align: center;
+        background-color: rgba(199, 212, 11, 0.6);
+        color: #000;
+        padding: 20px;
+      }
+
+    </style>
+  </head>
+  <body>
+    
+    <div class="live-icon"></div><p class="live-text">ON AIR 24/7</p> 
+    <main>
+      <section id="xfu-player">
+        <figure id="big-ol-button" class="play play-pause-toggle"></figure>
+        <audio id="audio-player">
+          <source src="http://retrostrange.com:8000/lofiscifi-mp3" type="audio/mpeg">
+          <source src="http://retrostrange.com:8000/lofiscifi-ogg" type="audio/ogg">
+            <p>Your browser doesn't support HTML5 audio. Direct URLs: <a href="http://retrostrange.com:8000/lofiscifi-mp3">mp3</a> <a href="http://retrostrange.com:8000/lofiscifi-ogg">ogg</a></p>
+        </audio>
+      </section>
+
+      <section id="metacontext">
+        <h1><span class="station-title">Lofi Scifi</span></h1> 
+        <h2><span class="station-description">24/7 Sci-fi Radio</span></h2>
+        <p class="playing no-init"><span class="context">Now Playing:</span> <span class="now-playing-title"></span> <span class="context">for <span class="total-listening"></span> listener(s).</span></p>
+
+        <p>Direct Links: <a href="https://retrostrange.com/lofiscifi-status.json">JSON</a>, <a href="http://retrostrange.com:8000/lofiscifi-mp3">mp3</a>, <a href="http://retrostrange.com:8000/lofiscifi-ogg">ogg</a></p>
+
+        <p>Tips $$: <a href="https://cash.app/$exfu">Cash app</a>, <a href="https://paypal.me/thephilnelson">PayPal</a></p>
+        
+      </section>
+
+      <p id="station-ident"><a href="https://twitter.com/philnelson">@philnelson</a> made this and he lives at <a href="https://extrafuture.com">extrafuture.com</a>. No DRM, No Tracking, <a href="https://validator.w3.org/nu/?doc=http%3A%2F%2Fretrostrange.com%2F">Well-formed HTML</a>.</p>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
+    <script>
+        $( document ).ready(function() {
+
+          possible_backgrounds = ['tvroll','glitch1','radio1','radio2'];
+          const chosen_background = possible_backgrounds[Math.floor(Math.random() * possible_backgrounds.length)];
+
+          $('html').addClass(chosen_background);
+          
+          updateStatus();
+
+          function updateStatus() {
+            jQuery.getJSON( '///retrostrange.com/lofiscifi-status.json', function(data) {
+              var currently_playing = `${data.currently_playing}`;
+              var current_listeners = `${data.current_listeners}`;
+              var page_title = $(document).prop('title');
+
+              $('.now-playing-title').text(currently_playing);
+              $('.total-listening').text(current_listeners);
+              
+              $(document).prop('title', 'Lofi Scifi - ' + currently_playing);
+
+              setTimeout(updateStatus, 5000);
+
+              $('.playing').css('opacity',1);
+            });
+          }
+
+            setTimeout(updateStatus, 3000);
+
+          audio_element = $('#audio-player').get(0);
+          
+          $('.play-pause-toggle').on('click', function(){
+            if(audio_element.paused) {
+              audio_element.play();
+              $('#big-ol-button').removeClass('play').addClass('pause');
+            }
+            else {
+              audio_element.pause();
+              $('#big-ol-button').removeClass('pause').addClass('play');
+            }
+          });
+
+        });
+
+    </script>
+  </body>
+</html>
