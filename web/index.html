@@ -69,6 +69,7 @@
         margin-right: auto;
         padding-top: 60px;
         border-top-left-radius: 40px;
+        margin-bottom: 40px;
       }
 
       @media only screen and (min-width: 600px) {
@@ -190,7 +191,17 @@
         text-align: center;
         background-color: rgba(199, 212, 11, 0.6);
         color: #000;
-        padding: 20px;
+        padding: 20px 20px 20px 20px;
+        margin: 0;
+      }
+
+      #shoutouts {
+        text-align: center;
+        padding: 0 20px 20px 20px;
+        background-color: rgba(199, 212, 11, 0.6);
+        color: #666;
+        margin: 0;
+        font-size: 14px;
       }
 
     </style>
@@ -211,15 +222,16 @@
       <section id="metacontext">
         <h1><span class="station-title">Lofi Scifi</span></h1> 
         <h2><span class="station-description">24/7 Sci-fi Radio</span></h2>
-        <p class="playing no-init"><span class="context">Now Playing:</span> <span class="now-playing-title"></span> <span class="context">for <span class="total-listening"></span> listener(s).</span></p>
+        <p class="playing no-init"><span class="context">Now Playing:</span> <span class="now-playing-title">Uncertain...</span> <span class="context">for <span class="total-listening"></span> listener(s).</span></p>
 
         <p>Direct Links: <a href="https://retrostrange.com/lofiscifi-status.json">JSON</a>, <a href="http://retrostrange.com:8000/lofiscifi-mp3">mp3</a>, <a href="http://retrostrange.com:8000/lofiscifi-ogg">ogg</a></p>
 
-        <p>Tips $$: <a href="https://cash.app/$exfu">Cash app</a>, <a href="https://paypal.me/thephilnelson">PayPal</a></p>
+        <p>Tips $$: <a href="https://www.patreon.com/philnelson">Patreon</a>, <a href="https://cash.app/$exfu">Cash app</a>, <a href="https://paypal.me/thephilnelson">PayPal</a></p>
         
       </section>
 
-      <p id="station-ident"><a href="https://twitter.com/philnelson">@philnelson</a> made this and he lives at <a href="https://extrafuture.com">extrafuture.com</a>. No DRM, No Tracking, <a href="https://validator.w3.org/nu/?doc=http%3A%2F%2Fretrostrange.com%2F">Well-formed HTML</a>.</p>
+      <p id="station-ident"><a href="https://twitter.com/philnelson">@philnelson</a> made this and he lives at <a href="https://extrafuture.com">extrafuture.com</a>.</p>
+      <p id="shoutouts">No DRM, No Tracking, <a href="https://validator.w3.org/nu/?doc=http%3A%2F%2Fretrostrange.com%2F">Well-formed HTML</a>. Source code <a href="https://github.com/philnelson/lofiscifi">available on GitHib</a>. We 🖤 <a href="https://archive.org/">Internet Archive</a>.</p>
     </main>
 
     <script src="https://code.jquery.com/jquery-latest.js"></script>
@@ -239,7 +251,14 @@
               var current_listeners = `${data.current_listeners}`;
               var page_title = $(document).prop('title');
 
-              $('.now-playing-title').text(currently_playing);
+              if (currently_playing != null) {
+                $('.now-playing-title').text(currently_playing);
+              }
+              else {
+                $('.now-playing-title').text('Uncertain...');
+              }
+              
+
               $('.total-listening').text(current_listeners);
               
               $(document).prop('title', 'Lofi Scifi - ' + currently_playing);
@@ -247,10 +266,12 @@
               setTimeout(updateStatus, 5000);
 
               $('.playing').css('opacity',1);
+            }).error(function() {
+              $('.total-listening').text('an unknown number of');
+              $('.now-playing-title').text('Audio of some kind');
+              $('.playing').css('opacity',1);
             });
           }
-
-            setTimeout(updateStatus, 3000);
 
           audio_element = $('#audio-player').get(0);
           
