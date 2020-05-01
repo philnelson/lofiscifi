@@ -1,3 +1,6 @@
+# Hide Your Stuff Here I Guess
+untracked assets
+
 # General
 .DS_Store
 .AppleDouble
@@ -164,3 +167,4 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+lofiscifi-status.json
