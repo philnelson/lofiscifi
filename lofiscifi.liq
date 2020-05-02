@@ -3,20 +3,22 @@
 set("log.file.path","/home/phil/oldtimeradio/lofiscifi-liq.log")
 
 # Programs
-programmes = playlist("/home/phil/oldtimeradio/audio_sources/station_programmes.m3u")
+programmes = playlist(reload=600,"/home/phil/oldtimeradio/audio_sources/station_programmes.m3u")
 # Some station idents
-station_idents = playlist("/home/phil/oldtimeradio/audio_sources/station_idents/station_idents.m3u")
+station_idents = playlist(reload=600,"/home/phil/oldtimeradio/audio_sources/station_idents/station_idents.m3u")
 # Some promos
-drop_ins = playlist("/home/phil/oldtimeradio/audio_sources/scifi_dropins/scifi_dropins.m3u")
+drop_ins = playlist(reload=600,"/home/phil/oldtimeradio/audio_sources/scifi_dropins/scifi_dropins.m3u")
 # If something goes wrong, we'll play this
 security = single("/home/phil/oldtimeradio/audio_sources/default.mp3")
 
 # Start building the feed with music
 radio = programmes
 # Now add some jingles
-radio = random(weights=[1,1,5],[ station_idents, drop_ins, radio ])
+radio = random(weights=[1,1,2],[ station_idents, drop_ins, radio ])
 # And finally the security
 radio = fallback(track_sensitive = false, [radio, security])
+# later if we want to add a sequential playlsit, e.g. a serialized show
+# playlist(mode="normal", "/home/phil/oldtimeradio/audio_sources/some_serialized_thing.m3u")
 
 radio_stereo = audio_to_stereo(radio)
 
