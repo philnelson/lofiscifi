@@ -1,6 +1,9 @@
 #!/usr/bin/liquidsoap
 # Log dir
-set("log.file.path","/home/phil/oldtimeradio/lofiscifi-liq.log")
+set("log.file.path",log_file_path_and_filename)
+
+# Retrieve Secrets
+%include "lofiscifi_config.liq"
 
 # Programs
 programmes = playlist(reload=600,"/home/phil/oldtimeradio/audio_sources/station_programmes.m3u")
@@ -14,7 +17,7 @@ security = single("/home/phil/oldtimeradio/audio_sources/default.mp3")
 # Start building the feed with music
 radio = programmes
 # Now add some jingles
-radio = random(weights=[1,1,2],[ station_idents, drop_ins, radio ])
+radio = random(weights=[2,1,3],[ station_idents, drop_ins, radio ])
 # And finally the security
 radio = fallback(track_sensitive = false, [radio, security])
 # later if we want to add a sequential playlsit, e.g. a serialized show
@@ -25,11 +28,11 @@ radio_stereo = audio_to_stereo(radio)
 # Stream it out
 output.icecast(%mp3,
   host = "localhost", port = 8000,
-  password = "", mount = "lofiscifi-mp3",
+  password = icecast_password, mount = "lofiscifi-mp3",
   radio_stereo)
 
 output.icecast(%vorbis,
   host = "localhost", port = 8000,
-  password = "", mount = "lofiscifi-ogg",
+  password = icecast_password, mount = "lofiscifi-ogg",
   radio_stereo)
 
