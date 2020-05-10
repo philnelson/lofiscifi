@@ -1,3 +1,4 @@
+import os
 import requests
 from bs4 import BeautifulSoup
 import re
@@ -16,6 +17,7 @@ url = args.url
 url_parts = urlparse(url)
 output_directory = args.directory
 extension = args.extension
+files_downloaded = 0
 
 r = requests.get(url)
 soup = BeautifulSoup(r.text, 'html.parser')
@@ -23,21 +25,31 @@ soup = BeautifulSoup(r.text, 'html.parser')
 
 for link in soup.find_all('a', href=True):
     href = link.get("href")
-    #print(url_parts)
+    
     # Lose anchors to local files
-    if href[-3:] == extension:
-        if href[:4].lower not in ["http"]:
-            file_url = f"{url_parts.scheme}://{url_parts.netloc}{url_parts.path}/{href[:-3]}{extension}"
+    file_url = None
+    if href[-(len(extension)+1):] == f'.{extension}':
+        #print(len(extension))
+        #print(href[:4])
+        if href[:4] == "http":
+            file_url = href
         else:
-            file_url = f"{href[:-3]}{extension}"
+            #print("No HTTP")
+            file_url = f"{url_parts.scheme}://{url_parts.netloc}{url_parts.path}/{href[-len(extension):]}"
 
+        file_parts = urlparse(file_url)
+        #print(file_parts)
         print(f"Downloading File {file_url}")
-        download = requests.get(f'{file_url}')
+        download = requests.get(file_url)
         if download.status_code == 200:
-            with open(f'{output_directory}/{href[:-3]}{extension}', 'wb') as f:
+            with open(f'{output_directory}/{os.path.basename(file_parts.path)}', 'wb') as f:
                 f.write(download.content)
+
+            files_downloaded += 1
         else:
             print(f"Download Failed For File {file_url}")
     else:
        #print("Too spicy.")
         pass
+
+print(f'Downloaded {files_downloaded} files to {output_directory}.')
