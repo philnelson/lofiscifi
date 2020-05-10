@@ -1,6 +1,9 @@
 # Hide Your Stuff Here I Guess
 untracked assets
 
+# Secret Codes
+icecast_passwords.liq
+
 # General
 .DS_Store
 .AppleDouble
@@ -168,3 +171,4 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 lofiscifi-status.json
+crontabs

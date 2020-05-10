@@ -1,0 +1,2 @@
+nice -n 19 goaccess PATH_TO/access.log -o PATH_TO/report.html --hide-referer=ww?.retrostrange.com --html-report-title="NGINX REPORT" --log-format=COMBINED --real-os --db-path=PATH_TO/goaccess-db
+nice -n 19 goaccess PATH_TO/access.log -o PATH_TO/stream_report.html --hide-referer=ww?.yourdomain.ext --html-report-title="ICECAST SESSIONS REPORT" --log-format='%h %^[%d:%t %^] "%r" %s %b "%R" "%u" %T' --date-format=%d/%b/%Y --time-format=%T --real-os --db-path=PATH_TO/goaccess-db
