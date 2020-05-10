@@ -172,3 +172,4 @@ dmypy.json
 cython_debug/
 lofiscifi-status.json
 crontabs
+lofiscifi_config.liq
