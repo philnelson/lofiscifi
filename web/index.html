@@ -38,27 +38,7 @@
       }
 
       html {
-        background: #ddd;
-      }
-
-      html.tvroll {
-        background: #ddd url(img/fuzzy_screen.gif) center center repeat;
-        background-size: 400%;
-      }
-
-      html.glitch1 {
-        background: #ddd url(img/glitch_reed.gif) center center repeat;
-        background-size: 400%;
-      }
-
-      html.radio1 {
-        background: #ddd url(img/radio_grunge.gif) center center repeat;
-        background-size: 400%;
-      }
-
-      html.radio2 {
-        background: #ddd url(img/old_radio_tune.gif) center center repeat;
-        background-size: 400%;
+        background: #666;
       }
 
       main {
@@ -67,9 +47,142 @@
         width: 300px;
         margin-left: auto;
         margin-right: auto;
-        padding-top: 60px;
+        padding-top: 40px;
         border-top-left-radius: 40px;
         margin-bottom: 40px;
+        margin-top: 40px;
+        position: relative;
+        z-index: 6;
+      }
+
+      .megatron {
+        animation-duration: 10s;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        opacity: 1;
+        position:fixed;
+      }
+
+      #background-frontrow {
+        z-index: 5;
+        opacity: 1;
+      }
+
+      #background-backrow {
+        z-index: 4;
+        opacity: 1;
+      }
+
+      .megatron.tvroll {
+        background: #ddd url(img/fuzzy_screen.gif) center center repeat;
+        background-size: 400%;
+      }
+
+      .megatron.glitch1 {
+        background: #ddd url(img/glitch_reed.gif) center center repeat;
+        background-size: 400%;
+      }
+
+      .megatron.radio1 {
+        background: #ddd url(img/radio_grunge.gif) center center repeat;
+        background-size: 400%;
+      }
+
+      .megatron.radio2 {
+        background: #ddd url(img/old_radio_tune.gif) center center repeat;
+        background-size: 400%;
+      }
+
+      .megatron.astrofreak {
+        background: #ddd url(img/astro_freak.gif) center center repeat;
+        background-size: 200%;
+      }
+
+      .megatron.smokycolors {
+        background: #ddd url(img/smoky_colors.gif) center center repeat;
+        background-size: 400%;
+      }
+
+      .megatron.tvroll {
+        background: #ddd url(img/fuzzy_screen.gif) center center repeat;
+        background-size: 200%;
+      }
+
+      .megatron.glitch1 {
+        background: #ddd url(img/glitch_reed.gif) center center repeat;
+        background-size: 200%;
+      }
+
+      .megatron.radio1 {
+        background: #ddd url(img/radio_grunge.gif) center center repeat;
+        background-size: 200%;
+      }
+
+      .megatron.radio2 {
+        background: #ddd url(img/old_radio_tune.gif) center center repeat;
+        background-size: 200%;
+      }
+
+      .megatron.astrofreak {
+        background: #ddd url(img/astro_freak.gif) center center repeat;
+        background-size: 200%;
+      }
+
+      .megatron.smokycolors {
+        background: #ddd url(img/smoky_colors.gif) center center repeat;
+        background-size: 200%;
+      }
+
+      @-webkit-keyframes fadeOut {
+        from {
+          opacity: 1;
+        }
+
+        to {
+          opacity: 0;
+        }
+      }
+
+      @keyframes fadeOut {
+        from {
+          opacity: 1;
+        }
+
+        to {
+          opacity: 0;
+        }
+      }
+
+      @-webkit-keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+
+        to {
+          opacity: 1;
+        }
+      }
+
+      .fadeIn {
+        -webkit-animation-name: fadeIn;
+        animation-name: fadeIn;
+      }
+
+      .fadeOut {
+        -webkit-animation-name: fadeOut;
+        animation-name: fadeOut;
       }
 
       @media only screen and (min-width: 600px) {
@@ -78,8 +191,13 @@
         }
       }
 
+      @media only screen and (min-width: 1200px) {
+        main {
+          width: 800px;
+        }
+      }
+
       #xfu-player {
-        
         width: 100%;
         display: block;
         clear: both;
@@ -119,17 +237,25 @@
         transition-property: opacity;
         transition-duration: 150ms;
         margin-bottom: 40px;
+        text-align: center;
+        font-size: 24px;
+        line-height: 28px;
       }
 
       .playing .context {
         display: block;
-        
         clear: both;
         text-transform: uppercase;
       }
 
       /* ON AIR */ 
-      .live-icon {
+      #status-and-settings {
+        position: absolute;
+        z-index: 7;
+        top: 0;
+      }
+
+      #status-and-settings .live-icon {
         display: inline-block;
         margin: 0 auto;
         border-radius: 50%;
@@ -139,7 +265,7 @@
         animation: live 2s infinite;
       }
 
-      .live-text {
+      #status-and-settings .live-text {
         display: inline-block;
         text-align: center; 
         color: red; 
@@ -150,8 +276,15 @@
         top: -4px;
       }
 
+      #status-and-settings .open-settings {
+        text-decoration: underline;
+        color: #fff;
+      }
+
       .now-playing-title {
         font-family: 'Rubik Bold Italic';
+        font-size: 32px;
+        line-height: 40px;
       }
 
       @keyframes live {
@@ -189,7 +322,7 @@
 
       #station-ident {
         text-align: center;
-        background-color: rgba(199, 212, 11, 0.6);
+        background-color: rgba(255, 220, 0, 0.5);
         color: #000;
         padding: 20px 20px 20px 20px;
         margin: 0;
@@ -198,17 +331,34 @@
       #shoutouts {
         text-align: center;
         padding: 0 20px 20px 20px;
-        background-color: rgba(199, 212, 11, 0.6);
+        background-color: rgba(255, 220, 0, 0.5);
         color: #666;
         margin: 0;
         font-size: 14px;
       }
 
+      #filthy-lucre {
+        text-align: center;
+        padding: 20px 20px 20px 20px;
+        background-color: rgba(99, 148, 80, 0.6);
+        color: #666;
+        margin: 0;
+        font-size: 14px;
+      }
+      
+
     </style>
   </head>
   <body>
+    <div id="status-and-settings">
+      <div class="live-icon"></div>
+      <p class="live-text">ON AIR 24/7</p>
+    </div>
+
+    <div class="modal-canvas">
+
+    </div>
     
-    <div class="live-icon"></div><p class="live-text">ON AIR 24/7</p> 
     <main>
       <section id="xfu-player">
         <figure id="big-ol-button" class="play play-pause-toggle"></figure>
@@ -222,7 +372,7 @@
       <section id="metacontext">
         <h1><span class="station-title">Lofi Scifi</span></h1> 
         <h2><span class="station-description">24/7 Sci-fi Radio</span></h2>
-        <p class="playing no-init"><span class="context">Now Playing:</span> <span class="now-playing-title">Uncertain...</span> <span class="context">for <span class="total-listening"></span> listener(s).</span></p>
+        <h3 class="playing no-init"><span class="context">Now Playing:</span> <span class="now-playing-title">Uncertain...</span> <span class="context">for <span class="total-listening"></span> listener(s).</span></h3>
 
         <p>Direct Links: <a href="https://retrostrange.com/lofiscifi-status.json">JSON</a>, <a href="http://retrostrange.com:8000/lofiscifi-mp3">mp3</a>, <a href="http://retrostrange.com:8000/lofiscifi-ogg">ogg</a></p>
 
@@ -231,46 +381,65 @@
       </section>
 
       <p id="station-ident"><a href="https://twitter.com/philnelson">@philnelson</a> made this and he lives at <a href="https://extrafuture.com">extrafuture.com</a>.</p>
-      <p id="shoutouts">No DRM, No Tracking, <a href="https://validator.w3.org/nu/?doc=http%3A%2F%2Fretrostrange.com%2F">Well-formed HTML</a>. Source code <a href="https://github.com/philnelson/lofiscifi">available on GitHib</a>. We 🖤 <a href="https://archive.org/">Internet Archive</a>.</p>
+      <p id="shoutouts">No DRM, No Tracking, <a href="https://validator.w3.org/nu/?doc=http%3A%2F%2Fretrostrange.com%2F">Well-formed HTML</a>. Source code <a href="https://github.com/philnelson/lofiscifi">available on GitHib</a>. We 🖤 <a href="https://archive.org/">Internet Archive</a>. Station Curator: Noah S. Maher.</p>
+      <p id="filthy-lucre">💵 Want to support the station? Use <a href="https://www.anrdoezrs.net/click-3445809-10558508">this link</a> to buy your used Science Fiction books. We like the <a href="https://www.anrdoezrs.net/click-3445809-10880871">Bargain Bin</a>. 📚</p>
     </main>
 
     <script src="https://code.jquery.com/jquery-latest.js"></script>
     <script>
         $( document ).ready(function() {
 
-          possible_backgrounds = ['tvroll','glitch1','radio1','radio2'];
-          const chosen_background = possible_backgrounds[Math.floor(Math.random() * possible_backgrounds.length)];
-
-          $('html').addClass(chosen_background);
-          
           updateStatus();
+          
+          $('html').append('<div class="megatron" id="background-frontrow"></div>');
+          $('html').append('<div class="megatron" id="background-backrow"></div>');
+          let possible_backgrounds = ['tvroll','glitch1','radio1','radio2','astrofreak','smokycolors'];
+          let chosen_background = possible_backgrounds[Math.floor(Math.random() * possible_backgrounds.length)];
+          $('#background-frontrow').addClass(chosen_background);
 
-          function updateStatus() {
-            jQuery.getJSON( '///retrostrange.com/lofiscifi-status.json', function(data) {
-              var currently_playing = `${data.currently_playing}`;
-              var current_listeners = `${data.current_listeners}`;
-              var page_title = $(document).prop('title');
+          next_background = chosen_background;
 
-              if (currently_playing != null) {
-                $('.now-playing-title').text(currently_playing);
-              }
-              else {
-                $('.now-playing-title').text('Uncertain...');
-              }
+          while (next_background == chosen_background) {
+            next_background = possible_backgrounds[Math.floor(Math.random() * possible_backgrounds.length)];
+          }
+
+          $('#background-backrow').addClass(next_background);
+
+          // Bout twelve minutes
+          background_change_timer = 720000;
+          background_last_changed = Date.now();
+
+          animationTick();
+
+          function animationTick() {
+            if ((Date.now() - background_last_changed) >= background_change_timer) {
               
+              new_background = chosen_background;
 
-              $('.total-listening').text(current_listeners);
+              while (new_background == chosen_background) {
+                new_background = possible_backgrounds[Math.floor(Math.random() * possible_backgrounds.length)];
+              }
+              chosen_background = new_background;
               
-              $(document).prop('title', 'Lofi Scifi - ' + currently_playing);
+              console.log('Changing BG', new_background);
 
-              setTimeout(updateStatus, 5000);
+              $('#background-backrow').removeClass('tvroll glitch1 radio1 radio2 astrofreak smokycolors').addClass(new_background);
 
-              $('.playing').css('opacity',1);
-            }).error(function() {
-              $('.total-listening').text('an unknown number of');
-              $('.now-playing-title').text('Audio of some kind');
-              $('.playing').css('opacity',1);
-            });
+              animateCSS('#background-frontrow', 'fadeOut', function(){ 
+                $('#background-frontrow').removeClass('tvroll glitch1 radio1 radio2 astrofreak smokycolors').addClass(new_background);
+                next_background = chosen_background;
+
+                while (next_background == chosen_background) {
+                  next_background = possible_backgrounds[Math.floor(Math.random() * possible_backgrounds.length)];
+                }
+
+                $('#background-backrow').addClass(next_background);
+              });
+
+              background_last_changed = Date.now();
+            }
+
+            setTimeout(animationTick,500);
           }
 
           audio_element = $('#audio-player').get(0);
@@ -285,6 +454,47 @@
               $('#big-ol-button').removeClass('pause').addClass('play');
             }
           });
+
+          function updateStatus() {
+            jQuery.getJSON( '///retrostrange.com/lofiscifi-status.json', function(data) {
+              var currently_playing = `${data.currently_playing}`;
+              var current_listeners = `${data.current_listeners}`;
+              var page_title = $(document).prop('title');
+
+              if (currently_playing != null) {
+                $('.now-playing-title').text(currently_playing);
+              }
+              else {
+                $('.now-playing-title').text('Uncertain...');
+              }
+              
+              $('.total-listening').text(current_listeners);
+              
+              $(document).prop('title', 'Lofi Scifi - ' + currently_playing);
+
+              $('.playing').css('opacity',1);
+            }).error(function() {
+              $('.total-listening').text('an unknown number of');
+              $('.now-playing-title').text('Audio of some kind');
+              $('.playing').css('opacity',1);
+            });
+
+            setTimeout(updateStatus, 3000);
+          }
+
+          function animateCSS(element, animationName, callback) {
+              const node = document.querySelector(element)
+              node.classList.add('animated', animationName)
+
+              function handleAnimationEnd() {
+                  node.classList.remove('animated', animationName)
+                  node.removeEventListener('animationend', handleAnimationEnd)
+
+                  if (typeof callback === 'function') callback()
+              }
+
+              node.addEventListener('animationend', handleAnimationEnd);
+          }
 
         });
 
