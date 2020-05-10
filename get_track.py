@@ -12,7 +12,7 @@ icecast_xspf = requests.get(url)
 if icecast_xspf.status_code == 200:
     xml_root = ET.fromstring(icecast_xspf.content)
 
-    #print(xml_root[0].text)
+    # print(xml_root[0].text)
 
     currently_playing = xml_root[2][0][1].text
     notes = xml_root[2][0][2].text.split('\n')
