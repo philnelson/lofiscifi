@@ -23,6 +23,6 @@ output.icecast(
                preset="ultrafast")),
 host="localhost",
 port=8000,
-password="y%H6LvABfAjWmJGKknFaPM",
+password="",
 mount="horrorshow-mp4",
 tv_feed)
