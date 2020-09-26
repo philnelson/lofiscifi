@@ -30,12 +30,17 @@ for link in soup.find_all('a', href=True):
     file_url = None
     if href[-(len(extension)+1):] == f'.{extension}':
         #print(len(extension))
-        #print(href[:4])
+        #print(href[-len(extension):])
         if href[:4] == "http":
             file_url = href
         else:
-            #print("No HTTP")
-            file_url = f"{url_parts.scheme}://{url_parts.netloc}{url_parts.path}/{href[-len(extension):]}"
+            if '/' in href:
+                if href[1:] == '/':
+                    file_url = f"{url_parts.scheme}://{url_parts.netloc}{url_parts.path}/{href[-len(extension):]}"
+                else:
+                    file_url = f"{url_parts.scheme}://{url_parts.netloc}{url_parts.path}/{href[-len(extension):]}"
+            else:
+                file_url = f"{url_parts.scheme}://{url_parts.netloc}{url_parts.path}/{href}"
 
         file_parts = urlparse(file_url)
         #print(file_parts)
