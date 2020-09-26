@@ -320,18 +320,10 @@
         margin: 0 0 20px 0;
       }
 
-      #station-ident {
-        text-align: center;
-        background-color: rgba(255, 220, 0, 0.5);
-        color: #000;
-        padding: 20px 20px 20px 20px;
-        margin: 0;
-      }
-
       #shoutouts {
         text-align: center;
-        padding: 0 20px 20px 20px;
-        background-color: rgba(255, 220, 0, 0.5);
+        padding: 20px 20px 20px 20px;
+        background-color: rgba(255, 220, 0, 0.7);
         color: #666;
         margin: 0;
         font-size: 14px;
@@ -380,9 +372,8 @@
         
       </section>
 
-      <p id="station-ident"><a href="https://twitter.com/philnelson">@philnelson</a> made this and he lives at <a href="https://extrafuture.com">extrafuture.com</a>.</p>
-      <p id="shoutouts">No DRM, No Tracking, <a href="https://validator.w3.org/nu/?doc=http%3A%2F%2Fretrostrange.com%2F">Well-formed HTML</a>. Source code <a href="https://github.com/philnelson/lofiscifi">available on GitHib</a>. We 🖤 <a href="https://archive.org/">Internet Archive</a>. Station Curator: Noah S. Maher.</p>
-      <p id="filthy-lucre">💵 Want to support the station? Use <a href="https://www.anrdoezrs.net/click-3445809-10558508">this link</a> to buy your used Science Fiction books. We like the <a href="https://www.anrdoezrs.net/click-3445809-10880871">Bargain Bin</a>. 📚</p>
+      <p id="shoutouts">No DRM, No Tracking, <a href="https://validator.w3.org/nu/?doc=http%3A%2F%2Fretrostrange.com%2F">Well-formed HTML</a>. Source code <a href="https://github.com/philnelson/lofiscifi">available on GitHib</a>. We 🖤 <a href="https://archive.org/">Internet Archive</a>. Station Curator: Noah S. Maher. <a href="https://twitter.com/philnelson">@philnelson</a> made this and he lives at <a href="https://extrafuture.com">extrafuture.com</a>.</p>
+      <!--<p id="filthy-lucre">💵 Want to support the station? Use <a href="https://www.anrdoezrs.net/click-3445809-10558508">this link</a> to buy your used Science Fiction books. We like the <a href="https://www.anrdoezrs.net/click-3445809-10880871">Bargain Bin</a>. 📚</p>-->
     </main>
 
     <script src="https://code.jquery.com/jquery-latest.js"></script>
@@ -390,9 +381,9 @@
         $( document ).ready(function() {
 
           updateStatus();
+          setInterval(updateStatus, 5000);
           
           $('html').append('<div class="megatron" id="background-frontrow"></div>');
-          $('html').append('<div class="megatron" id="background-backrow"></div>');
           let possible_backgrounds = ['tvroll','glitch1','radio1','radio2','astrofreak','smokycolors'];
           let chosen_background = possible_backgrounds[Math.floor(Math.random() * possible_backgrounds.length)];
           $('#background-frontrow').addClass(chosen_background);
@@ -405,42 +396,9 @@
 
           $('#background-backrow').addClass(next_background);
 
-          // Bout twelve minutes
-          background_change_timer = 720000;
-          background_last_changed = Date.now();
-
-          animationTick();
-
-          function animationTick() {
-            if ((Date.now() - background_last_changed) >= background_change_timer) {
-              
-              new_background = chosen_background;
-
-              while (new_background == chosen_background) {
-                new_background = possible_backgrounds[Math.floor(Math.random() * possible_backgrounds.length)];
-              }
-              chosen_background = new_background;
-              
-              console.log('Changing BG', new_background);
-
-              $('#background-backrow').removeClass('tvroll glitch1 radio1 radio2 astrofreak smokycolors').addClass(new_background);
-
-              animateCSS('#background-frontrow', 'fadeOut', function(){ 
-                $('#background-frontrow').removeClass('tvroll glitch1 radio1 radio2 astrofreak smokycolors').addClass(new_background);
-                next_background = chosen_background;
-
-                while (next_background == chosen_background) {
-                  next_background = possible_backgrounds[Math.floor(Math.random() * possible_backgrounds.length)];
-                }
-
-                $('#background-backrow').addClass(next_background);
-              });
-
-              background_last_changed = Date.now();
-            }
-
-            setTimeout(animationTick,500);
-          }
+          // 5 minutes
+          //background_change_timer = 5000;
+          //background_last_changed = Date.now();
 
           audio_element = $('#audio-player').get(0);
           
@@ -479,21 +437,6 @@
               $('.playing').css('opacity',1);
             });
 
-            setTimeout(updateStatus, 3000);
-          }
-
-          function animateCSS(element, animationName, callback) {
-              const node = document.querySelector(element)
-              node.classList.add('animated', animationName)
-
-              function handleAnimationEnd() {
-                  node.classList.remove('animated', animationName)
-                  node.removeEventListener('animationend', handleAnimationEnd)
-
-                  if (typeof callback === 'function') callback()
-              }
-
-              node.addEventListener('animationend', handleAnimationEnd);
           }
 
         });

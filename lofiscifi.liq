@@ -1,9 +1,10 @@
 #!/usr/bin/liquidsoap
-# Log dir
-set("log.file.path",log_file_path_and_filename)
 
 # Retrieve Secrets
 %include "lofiscifi_config.liq"
+
+# Log dir
+set("log.file.path",log_file_path_and_filename)
 
 # Programs
 programmes = playlist(reload=600,"/home/phil/oldtimeradio/audio_sources/station_programmes.m3u")
@@ -14,10 +15,8 @@ drop_ins = playlist(reload=600,"/home/phil/oldtimeradio/audio_sources/scifi_drop
 # If something goes wrong, we'll play this
 security = single("/home/phil/oldtimeradio/audio_sources/default.mp3")
 
-# Start building the feed with music
-radio = programmes
-# Now add some jingles
-radio = random(weights=[2,1,3],[ station_idents, drop_ins, radio ])
+# Add the programs and promos/commercials
+radio = random(weights=[1,3,2],[ drop_ins, programmes, station_idents ])
 # And finally the security
 radio = fallback(track_sensitive = false, [radio, security])
 # later if we want to add a sequential playlsit, e.g. a serialized show
